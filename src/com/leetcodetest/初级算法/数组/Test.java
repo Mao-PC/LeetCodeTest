@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 public class Test {
     public static void main(String[] args) {
-        String s = "111!!11!1";
+        char[] allChars = new char[]{'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
-        char[] chars = s.replace("!", "").toCharArray();
-        System.out.println(Arrays.toString(chars));
+        for (int i = 0; i < 10; i++) {
+            System.out.println(allChars[i] - 49);
+        }
     }
 }

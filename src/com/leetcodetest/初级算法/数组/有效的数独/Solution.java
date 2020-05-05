@@ -12,9 +12,13 @@ class Solution {
             for (int j = 0; j < boardRow.length; j++) {
                 if ('.' == boardRow[j]) {
                     // 横向
-                    char[] rowOthers = getOtherChars(boardRow);
+                    char[] rowOthers = getOtherChars(board[j]);
                     // 竖向
-                    char[] colOthers = getOtherChars(board[j]);
+                    char[] colNums = new char[9];
+                    for (int k = 0; k < 9; k++) {
+                        colNums[k] = board[k][j];
+                    }
+                    char[] colOthers = getOtherChars(colNums);
                     // 3*3
                     char[] nightOthers = getOtherChars(get33Chars(i, j, board));
                     char[] sameChars = getSameChars(rowOthers, colOthers, nightOthers);
@@ -129,10 +133,10 @@ class Solution {
                 emptyNums++;
                 for (int n = 0; n < probableChars[i][m].length; n++) {
                     set.add(probableChars[i][m][n]);
-                    if (set.size() < emptyNums) return false;
                 }
             }
         }
+        if (set.size() < emptyNums) return false;
 
         set.clear();
         emptyNums = 0;
@@ -143,10 +147,10 @@ class Solution {
                 emptyNums++;
                 for (int n = 0; n < probableChars[m][j].length; n++) {
                     set.add(probableChars[m][j][n]);
-                    if (set.size() < emptyNums) return false;
                 }
             }
         }
+        if (set.size() < emptyNums) return false;
 
         set.clear();
         emptyNums = 0;
@@ -158,11 +162,11 @@ class Solution {
                     emptyNums++;
                     for (int k = 0; k < probableChars[m][n].length; k++) {
                         set.add(probableChars[m][n][k]);
-                        if (set.size() < emptyNums) return false;
                     }
                 }
             }
         }
+        if (set.size() < emptyNums) return false;
 
         return true;
     }
@@ -192,9 +196,11 @@ class Solution {
     private char[] get33Chars(int i, int j, char[][] board) {
         char[] res = new char[9];
         int k = 0;
-        for (int m = getIndex(i); m < getIndex(i) + 3; m++) {
-            for (int n = getIndex(j); n < getIndex(j) + 3; n++) {
-                res[k] = board[m][n];
+        int i1 = getIndex(i);
+        int j1 = getIndex(j);
+        for (int m = i1; m < i1 + 3; m++) {
+            for (int n = j1; n < j1 + 3; n++) {
+                res[k] = board[n][m];
                 k++;
             }
         }

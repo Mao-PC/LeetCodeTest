@@ -1,7 +1,5 @@
 package com.leetcodetest.初级算法.字符串.整数反转;
 
-import java.util.Arrays;
-
 class Solution {
     public int reverse(int x) {
         long res = 0;

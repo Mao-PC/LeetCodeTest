@@ -1,26 +1,45 @@
 package com.leetcodetest.初级算法.树;
 
 public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+    public Integer val;
+    public TreeNode left;
+    public TreeNode right;
 
-    TreeNode(int x) {
+    TreeNode(Integer x) {
         val = x;
     }
 
-    public static TreeNode getTree(int... values){
+    public static TreeNode getTree(Integer... values) {
         if (values == null || values.length == 0) return null;
-        TreeNode tree = new TreeNode(values[0]);
-        TreeNode[] nodes = new TreeNode[values.length];
-        nodes[0] = tree;
-        for (int i = 1; i < values.length; i++) {
-            for (int j = 0; j < nodes.length; j++) {
-                if (nodes[j] != null) {
-                    TreeNode node = new TreeNode(values[i]);
-                    nodes[j].left = node;
+        TreeNode node = new TreeNode(values[0]);
+        getTree(1, values, new TreeNode[]{node});
+        return node;
+    }
+
+    private static void getTree(int index, Integer[] values, TreeNode[] treeNodes) {
+        if (index == values.length) {
+            return;
+        } else {
+            TreeNode[] nodes = new TreeNode[treeNodes.length * 2];
+            for (int i = 0; i < treeNodes.length; i++) {
+                if (treeNodes[i] != null) {
+                    if (values[index] != null)
+                        treeNodes[i].left = new TreeNode(values[index]);
+                    if (values[index+1] != null)
+                        treeNodes[i].right = new TreeNode(values[index + 1]);
+
+                    nodes[i] = treeNodes[i].left;
+                    nodes[i + 1] = treeNodes[i].right;
+
+                    index += 2;
                 }
             }
+            getTree(index, values, nodes);
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.val == null ? null : this.val+"";
     }
 }

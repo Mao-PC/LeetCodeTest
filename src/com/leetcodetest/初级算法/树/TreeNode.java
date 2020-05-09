@@ -1,5 +1,9 @@
 package com.leetcodetest.初级算法.树;
 
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.function.IntFunction;
+
 public class TreeNode {
     public Integer val;
     public TreeNode left;
@@ -17,29 +21,30 @@ public class TreeNode {
     }
 
     private static void getTree(int index, Integer[] values, TreeNode[] treeNodes) {
-        if (index == values.length) {
+        if (index >= values.length) {
             return;
         } else {
             TreeNode[] nodes = new TreeNode[treeNodes.length * 2];
             for (int i = 0; i < treeNodes.length; i++) {
                 if (treeNodes[i] != null) {
-                    if (values[index] != null)
+                    if (index < values.length && values[index] != null)
                         treeNodes[i].left = new TreeNode(values[index]);
-                    if (values[index+1] != null)
+                    if (index + 1 < values.length && values[index + 1] != null)
                         treeNodes[i].right = new TreeNode(values[index + 1]);
 
-                    nodes[i] = treeNodes[i].left;
-                    nodes[i + 1] = treeNodes[i].right;
-
-                    index += 2;
+                    nodes[i*2] = treeNodes[i].left;
+                    nodes[i*2 + 1] = treeNodes[i].right;
                 }
+
+                index += 2;
             }
+
             getTree(index, values, nodes);
         }
     }
 
     @Override
     public String toString() {
-        return this.val == null ? null : this.val+"";
+        return this.val == null ? null : this.val + "";
     }
 }

@@ -4,17 +4,39 @@ class TreeNode:
         self.left = None
         self.right = None
 
+
 class Solution:
     def isSymmetric(self, root: TreeNode) -> bool:
-        if root == None: return True;
-        return self.isSymmetric(root.left, root.right)
+        if root == None:
+            return True
+        return self.isSymmetricInner(root.left, root.right)
 
-    def isSymmetric(self, left: TreeNode, right: TreeNode) -> bool:
-        if left == null && right == null : return True
-        
-        if left.val != right.val : return False
+    def isSymmetricInner(self, left: TreeNode, right: TreeNode) -> bool:
 
-        if left != null && right != null && left.val == right.val: 
+        if left == None and right == None:
+            return True
 
-        
-        return False
+        if left != None and right != None and left.val == right.val:
+            return self.isSymmetricInner(left.left, right.right) and self.isSymmetricInner(left.right, right.left)
+        else:
+            return False
+
+
+root = TreeNode(1)
+node1 = TreeNode(2)
+node2 = TreeNode(2)
+node3 = TreeNode(3)
+node4 = TreeNode(4)
+node5 = TreeNode(4)
+node6 = TreeNode(3)
+
+root.left = node1
+root.right = node2
+
+node1.left = node3
+node1.right = node4
+node2.left = node6
+node2.right = node5
+
+s = Solution()
+print(s.isSymmetric(root))

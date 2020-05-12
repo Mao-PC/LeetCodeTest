@@ -2,35 +2,47 @@ package com.leetcodetest.初级算法.树.将有序数组转换为二叉搜索�
 
 import com.leetcodetest.初级算法.树.TreeNode;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 class Solution {
+
+    private int[] nums = null;
+    private int length = 0;
+    private int center = 0;
+
     public TreeNode sortedArrayToBST(int[] nums) {
-        if (nums ==null || nums.length == 0) return null;
-        TreeNode node = new TreeNode(nums[0]);
-        sort(nums, 1, node, null, node, 0,0);
+        if (nums == null || nums.length == 0) return null;
+        this.nums = nums;
+        this.length = nums.length;
+        this.center = nums.length / 2;
+        TreeNode node = new TreeNode(nums[nums.length / 2]);
+        getBST(node, 0);
         return node;
     }
 
-    private void sort(int[] nums, int index, TreeNode root, TreeNode parentNode, TreeNode cNode, int leftDepth, int rightDepth){
-        if (index == nums.length -1) return;
+    private void getBST(TreeNode node, int distance) {
 
+        if (center-distance < 0 || distance + center >= length) return;
 
-
-        if (Math.abs(leftDepth-rightDepth) > 1) {
-
-        } else {
-            if (parentNode.right == null) {
-
-            } else if (parentNode.left == null) {
-
-            }
+        if (center - distance - 2 >= 0) {
+            node.left = new TreeNode(nums[center - distance - 2]);
+            getBST(node.left, distance - 2);
+        } else if (center - distance - 1 >= 0) {
+            node.left = new TreeNode(nums[center - distance - 2]);
+            return;
+        }
+        if (center + distance + 2 < length) {
+            node.right = new TreeNode((nums[center + distance + 2]));
+            getBST(node.right, distance + 2);
+        } else if (center + distance + 1 < length) {
+            node.right = new TreeNode((nums[center + distance + 1]));
+            return;
         }
     }
+
 }
 
 class Test {
-
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.sortedArrayToBST(new int[]{-10, -3, 0, 5, 9}));
+    }
 }

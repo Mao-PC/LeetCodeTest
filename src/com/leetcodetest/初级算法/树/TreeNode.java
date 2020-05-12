@@ -7,7 +7,6 @@ import java.util.Objects;
 import java.util.function.IntFunction;
 
 public class TreeNode {
-    private String str = "";
     public Integer val;
     public TreeNode left;
     public TreeNode right;
@@ -58,18 +57,6 @@ public class TreeNode {
 
     @Override
     public String toString() {
-        this.print(this);
-        return this.str;
-    }
-
-    private void print(TreeNode node) {
-        if (node == null) return;
-        str += node.val + "\t";
-        print(node.left);
-        print(node.right);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getTree(3, 9, 20, null, null, 15, 7, null, null, null, null, 1, 2, 3, 4));
+        return this.val + "";
     }
 }

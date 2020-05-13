@@ -1,5 +1,6 @@
 package com.leetcodetest.初级算法.树;
 
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +54,11 @@ public class TreeNode {
 
         getList(list, node.left, level + 1);
         getList(list, node.right, level + 1);
+    }
+
+    public static String preLoop(TreeNode node) {
+        if (node == null) return " null ";
+        return node.val + " " + preLoop(node.left) + preLoop(node.right);
     }
 
     @Override

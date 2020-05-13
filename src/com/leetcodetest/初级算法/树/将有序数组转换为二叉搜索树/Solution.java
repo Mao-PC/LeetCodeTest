@@ -4,38 +4,18 @@ import com.leetcodetest.初级算法.树.TreeNode;
 
 class Solution {
 
-    private int[] nums = null;
-    private int length = 0;
-    private int center = 0;
-
     public TreeNode sortedArrayToBST(int[] nums) {
         if (nums == null || nums.length == 0) return null;
-        this.nums = nums;
-        this.length = nums.length;
-        this.center = nums.length / 2;
-        TreeNode node = new TreeNode(nums[nums.length / 2]);
-        getBST(node, 0);
-        return node;
+        return getBST(nums, 0, nums.length-1);
     }
 
-    private void getBST(TreeNode node, int distance) {
-
-        if (center-distance < 0 || distance + center >= length) return;
-
-        if (center - distance - 2 >= 0) {
-            node.left = new TreeNode(nums[center - distance - 2]);
-            getBST(node.left, distance - 2);
-        } else if (center - distance - 1 >= 0) {
-            node.left = new TreeNode(nums[center - distance - 2]);
-            return;
-        }
-        if (center + distance + 2 < length) {
-            node.right = new TreeNode((nums[center + distance + 2]));
-            getBST(node.right, distance + 2);
-        } else if (center + distance + 1 < length) {
-            node.right = new TreeNode((nums[center + distance + 1]));
-            return;
-        }
+    private TreeNode getBST(int[] nums, int start, int end) {
+        if (start > end) return null;
+        int mid = (start + end) / 2;
+        TreeNode node = new TreeNode(nums[mid]);
+        node.left = getBST(nums, start, mid - 1);
+        node.right = getBST(nums, mid + 1, end);
+        return node;
     }
 
 }
@@ -43,6 +23,7 @@ class Solution {
 class Test {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        System.out.println(solution.sortedArrayToBST(new int[]{-10, -3, 0, 5, 9}));
+        TreeNode treeNode = solution.sortedArrayToBST(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19});
+        System.out.println(TreeNode.preLoop(treeNode));
     }
 }

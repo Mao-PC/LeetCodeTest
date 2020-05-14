@@ -4,38 +4,20 @@ import java.util.Arrays;
 
 class Solution {
     public int maxProfit(int[] prices) {
-        int[] index = new int[prices.length];
-
-        for (int i = 0; i < index.length; i++)
-            index[i] = i;
-
-
-        // 排序
+        int profit = 0;
         for (int i = 0; i < prices.length; i++) {
-            for (int j = i + 1; j < prices.length; j++) {
-                if (prices[i] > prices[j]) {
-                    int item = prices[j];
-                    prices[j] = prices[i];
-                    prices[i] = item;
-
-                    item = index[j];
-                    index[j] = index[i];
-                    index[i] = item;
-                }
+            for (int j = i+1; j < prices.length; j++) {
+                profit = Math.max(profit, prices[j]-prices[i]);
             }
         }
+        return profit;
+    }
+}
 
-        int minIndex = 0;
-        int maxIndex = prices.length-1;
-
-        int diff = 0;
-
-        while (maxIndex >= minIndex) {
-            if (index[maxIndex] > index[minIndex]) {
-                return index[maxIndex];
-            } else {
-                
-            }
-        }
+class Test {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.maxProfit(new int[]{7,1,5,3,6,4}));
+        System.out.println(solution.maxProfit(new int[]{7,6,4,3,1}));
     }
 }

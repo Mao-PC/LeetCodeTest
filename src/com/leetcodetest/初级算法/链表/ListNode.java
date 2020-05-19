@@ -25,6 +25,7 @@ public class ListNode {
     }
 
     public static ListNode getList(int... values) {
+        if (values == null || values.length == 0) return null;
         ListNode node = new ListNode(values[0]);
         ListNode node1 = node;
         for (int i = 1; i < values.length; i++) {

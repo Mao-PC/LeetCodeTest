@@ -1,4 +1,4 @@
-package com.leetcodetest;
+package com.leetcodetest.stackq.ten1;
 
 import java.util.Stack;
 

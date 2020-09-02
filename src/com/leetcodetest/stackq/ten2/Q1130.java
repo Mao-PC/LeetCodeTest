@@ -6,7 +6,7 @@ package com.leetcodetest.stackq.ten2;
 public class Q1130 {
     static class Solution {
         public int mctFromLeafValues(int[] arr) {
-
+            return 0;
         }
     }
 
